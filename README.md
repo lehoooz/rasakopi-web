@@ -85,11 +85,11 @@ Buka browser dan akses: **http://127.0.0.1:8000**
 
 Setelah menjalankan seeder, akun berikut tersedia:
 
-| Role     | Email                  | Password |
-|----------|------------------------|----------|
-| Admin    | admin@rasakopi.com     | password |
-| Kasir    | kasir@rasakopi.com     | password |
-| Customer | member@rasakopi.com    | password |
+| Role     | Email               | Password |
+| -------- | ------------------- | -------- |
+| Admin    | admin@rasakopi.com  | password |
+| Kasir    | kasir@rasakopi.com  | password |
+| Customer | member@rasakopi.com | password |
 
 ---
 
@@ -98,3 +98,5 @@ Setelah menjalankan seeder, akun berikut tersedia:
 - [Laravel 13](https://laravel.com)
 - [Tailwind CSS 4](https://tailwindcss.com)
 - [Maatwebsite Excel](https://laravel-excel.com)
+
+jimmy
