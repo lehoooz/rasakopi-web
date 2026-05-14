@@ -99,4 +99,3 @@ Setelah menjalankan seeder, akun berikut tersedia:
 - [Tailwind CSS 4](https://tailwindcss.com)
 - [Maatwebsite Excel](https://laravel-excel.com)
 
-jimmy
