@@ -191,7 +191,7 @@
                 </div>
             </div>
             <div class="rounded-2xl overflow-hidden shadow-2xl">
-                <img src="{{ asset('images/about.jpg') }}" alt="Tentang Rasakopi" class="w-full h-80 object-cover"
+                <img src="{{ asset('images/hero.jpg') }}" alt="Tentang Rasakopi" class="w-full h-80 object-cover"
                      onerror="this.parentElement.innerHTML='<div class=\'w-full h-80 bg-amber-800\'></div>'">
             </div>
         </div>

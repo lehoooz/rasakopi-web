@@ -74,7 +74,7 @@
                         <td class="px-6 py-3 text-gray-400">#{{ $order->id }}</td>
                         <td class="px-6 py-3 text-gray-500">{{ $order->created_at->format('d/m/Y H:i') }}</td>
                         <td class="px-6 py-3 text-gray-700">{{ $order->kasir->name ?? '-' }}</td>
-                        <td class="px-6 py-3 text-gray-600">{{ $order->customer->name ?? '<span class="italic text-gray-400">Umum</span>' }}</td>
+                        <td class="px-6 py-3 text-gray-600">{!! $order->customer ? e($order->customer->name) : '<span class="italic text-gray-400">Umum</span>' !!}</td>
                         <td class="px-6 py-3 text-gray-600">
                             @foreach($order->orderDetails as $d)
                                 <span class="block">{{ $d->product->name }} x{{ $d->qty }}</span>

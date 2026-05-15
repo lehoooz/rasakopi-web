@@ -9,6 +9,7 @@ use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\UserController;
 
 // ── Publik ────────────────────────────────────────────────
 Route::get('/', [LandingController::class, 'index']);
@@ -32,13 +33,24 @@ Route::post('/staff/logout', [AuthController::class, 'staffLogout'])->name('staf
 // ── Admin ─────────────────────────────────────────────────
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'dashboard']);
+    
+    // Kelola Produk
     Route::get('/products', [ProductController::class, 'index']);
     Route::get('/products/create', [ProductController::class, 'create']);
     Route::post('/products', [ProductController::class, 'store']);
     Route::get('/products/{product}/edit', [ProductController::class, 'edit']);
     Route::put('/products/{product}', [ProductController::class, 'update']);
     Route::delete('/products/{product}', [ProductController::class, 'destroy']);
-    Route::get('/users', function () { return view('admin.dashboard'); });
+    
+    // Kelola Akun (Users)
+    Route::get('/users', [UserController::class, 'index']);
+    Route::get('/users/create', [UserController::class, 'create']);
+    Route::post('/users', [UserController::class, 'store']);
+    Route::get('/users/{user}/edit', [UserController::class, 'edit']);
+    Route::put('/users/{user}', [UserController::class, 'update']);
+    Route::delete('/users/{user}', [UserController::class, 'destroy']);
+    
+    // Laporan
     Route::get('/reports', [ReportController::class, 'index']);
     Route::get('/reports/export', [ReportController::class, 'export']);
 });
