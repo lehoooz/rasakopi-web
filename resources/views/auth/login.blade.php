@@ -11,9 +11,8 @@
 <div class="w-full max-w-sm">
     <div class="text-center mb-8">
         <a href="/" class="flex items-center justify-center gap-2">
-            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-10 mx-auto"
-                 onerror="this.style.display='none'">
-            <span class="text-2xl font-bold text-amber-800">☕ Rasakopi</span>
+            
+            <span class="text-2xl font-bold text-amber-800">Rasakopi</span>
         </a>
     </div>
 
