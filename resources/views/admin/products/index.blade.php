@@ -14,7 +14,6 @@
 <div class="bg-white rounded-xl shadow-sm overflow-hidden">
     @if($products->isEmpty())
         <div class="text-center py-16 text-gray-400">
-            <p class="text-4xl mb-3">☕</p>
             <p>Belum ada menu. Tambahkan menu pertama!</p>
         </div>
     @else
@@ -35,7 +34,7 @@
                             @if($product->image)
                                 <img src="{{ asset('storage/' . $product->image) }}" class="w-10 h-10 rounded-lg object-cover">
                             @else
-                                <div class="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center text-lg">☕</div>
+                                <div class="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center text-sm text-gray-400">—</div>
                             @endif
                             <span class="font-medium text-gray-700">{{ $product->name }}</span>
                         </div>

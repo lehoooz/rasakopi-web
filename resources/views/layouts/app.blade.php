@@ -15,7 +15,7 @@
     <aside class="w-64 bg-amber-900 text-white flex flex-col flex-shrink-0">
         {{-- Logo --}}
         <div class="px-6 py-5 border-b border-amber-700">
-            <h1 class="text-2xl font-bold tracking-wide">☕ Rasakopi</h1>
+            <h1 class="text-2xl font-bold tracking-wide">Rasakopi</h1>
             <p class="text-amber-300 text-xs mt-1 capitalize">{{ Auth::user()->role }} Panel</p>
         </div>
 
@@ -24,46 +24,46 @@
 
             @if(Auth::user()->role === 'admin')
                 <a href="/admin" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-amber-700 transition {{ request()->is('admin') ? 'bg-amber-700' : '' }}">
-                    <span>🏠</span> <span>Dashboard</span>
+                    Dashboard
                 </a>
                 <a href="/admin/products" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-amber-700 transition {{ request()->is('admin/products*') ? 'bg-amber-700' : '' }}">
-                    <span>☕</span> <span>Kelola Menu</span>
+                    Kelola Menu
                 </a>
                 <a href="/admin/users" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-amber-700 transition {{ request()->is('admin/users*') ? 'bg-amber-700' : '' }}">
-                    <span>👥</span> <span>Kelola Akun</span>
+                    Kelola Akun
                 </a>
                 <a href="/admin/reports" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-amber-700 transition {{ request()->is('admin/reports*') ? 'bg-amber-700' : '' }}">
-                    <span>📊</span> <span>Laporan Keuangan</span>
+                    Laporan Keuangan
                 </a>
             @endif
 
             @if(Auth::user()->role === 'kasir')
                 <a href="/kasir" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-amber-700 transition {{ request()->is('kasir') ? 'bg-amber-700' : '' }}">
-                    <span>🏠</span> <span>Dashboard</span>
+                    Dashboard
                 </a>
                 <a href="/kasir/pos" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-amber-700 transition {{ request()->is('kasir/pos*') ? 'bg-amber-700' : '' }}">
-                    <span>🧾</span> <span>Buat Pesanan (POS)</span>
+                    Buat Pesanan (POS)
                 </a>
                 <a href="/kasir" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-amber-700 transition {{ request()->is('kasir') ? 'bg-amber-700' : '' }}">
-                    <span>📋</span> <span>Riwayat Transaksi</span>
+                    Riwayat Transaksi
                 </a>
                 <a href="/kasir/expenses" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-amber-700 transition {{ request()->is('kasir/expenses*') ? 'bg-amber-700' : '' }}">
-                    <span>💸</span> <span>Catat Pengeluaran</span>
+                    Catat Pengeluaran
                 </a>
                 <a href="/kasir/products" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-amber-700 transition {{ request()->is('kasir/products*') ? 'bg-amber-700' : '' }}">
-                    <span>☕</span> <span>Status Menu</span>
+                    Status Menu
                 </a>
             @endif
 
             @if(Auth::user()->role === 'customer')
                 <a href="/customer" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-amber-700 transition {{ request()->is('customer') ? 'bg-amber-700' : '' }}">
-                    <span>🏠</span> <span>Beranda</span>
+                    Beranda
                 </a>
                 <a href="/customer/menu" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-amber-700 transition {{ request()->is('customer/menu*') ? 'bg-amber-700' : '' }}">
-                    <span>☕</span> <span>Katalog Menu</span>
+                    Katalog Menu
                 </a>
                 <a href="/customer/loyalty" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-amber-700 transition {{ request()->is('customer/loyalty*') ? 'bg-amber-700' : '' }}">
-                    <span>🎁</span> <span>Poin Loyalitas</span>
+                    Poin Loyalitas
                 </a>
             @endif
 
@@ -80,10 +80,10 @@
                     <p class="text-amber-300 text-xs truncate">{{ Auth::user()->email }}</p>
                 </div>
             </div>
-            <form method="POST" action="{{ route('logout') }}">
+            <form method="POST" action="{{ route('staff.logout') }}">
                 @csrf
                 <button type="submit" class="w-full text-left flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-amber-700 transition text-sm">
-                    <span>🚪</span> <span>Keluar</span>
+                    Keluar
                 </button>
             </form>
         </div>

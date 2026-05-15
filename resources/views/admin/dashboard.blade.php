@@ -53,7 +53,6 @@
 
     @if($transaksiTerbaru->isEmpty())
         <div class="text-center py-10 text-gray-400">
-            <p class="text-3xl mb-2">🧾</p>
             <p>Belum ada transaksi.</p>
         </div>
     @else
