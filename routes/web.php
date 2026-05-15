@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\CustomerController;
 
 Route::get('/', function () {
     return redirect('/login');
@@ -23,34 +27,24 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::put('/products/{product}', [ProductController::class, 'update']);
     Route::delete('/products/{product}', [ProductController::class, 'destroy']);
     Route::get('/users', function () { return view('admin.dashboard'); });
-    Route::get('/reports', function () { return view('admin.dashboard'); });
+    Route::get('/reports', [ReportController::class, 'index']);
+    Route::get('/reports/export', [ReportController::class, 'export']);
 });
 
 // Kasir
 Route::middleware(['auth', 'role:kasir'])->prefix('kasir')->group(function () {
-    Route::get('/', function () {
-        return view('kasir.dashboard');
-    });
-    Route::get('/pos', function () {
-        return view('kasir.dashboard');
-    });
-    Route::get('/expenses', function () {
-        return view('kasir.dashboard');
-    });
-    Route::get('/products', function () {
-        return view('kasir.dashboard');
-    });
+    Route::get('/', [OrderController::class, 'history']);
+    Route::get('/pos', [OrderController::class, 'pos']);
+    Route::post('/pos', [OrderController::class, 'store']);
+    Route::get('/expenses', [ExpenseController::class, 'index']);
+    Route::post('/expenses', [ExpenseController::class, 'store']);
+    Route::delete('/expenses/{expense}', [ExpenseController::class, 'destroy']);
+    Route::get('/products', function () { return view('kasir.dashboard'); });
 });
 
 // Customer
 Route::middleware(['auth', 'role:customer'])->prefix('customer')->group(function () {
-    Route::get('/', function () {
-        return view('customer.dashboard');
-    });
-    Route::get('/menu', function () {
-        return view('customer.dashboard');
-    });
-    Route::get('/loyalty', function () {
-        return view('customer.dashboard');
-    });
+    Route::get('/', [CustomerController::class, 'dashboard']);
+    Route::get('/menu', [CustomerController::class, 'menu']);
+    Route::get('/loyalty', [CustomerController::class, 'loyalty']);
 });
