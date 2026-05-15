@@ -63,7 +63,6 @@ Route::middleware(['auth', 'role:kasir'])->prefix('kasir')->group(function () {
     Route::get('/expenses', [ExpenseController::class, 'index']);
     Route::post('/expenses', [ExpenseController::class, 'store']);
     Route::delete('/expenses/{expense}', [ExpenseController::class, 'destroy']);
-    Route::get('/products', function () { return view('kasir.dashboard'); });
 });
 
 // ── Customer (opsional, hanya kalau login) ────────────────

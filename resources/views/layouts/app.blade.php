@@ -47,9 +47,6 @@
                 <a href="/kasir/expenses" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-amber-700 transition {{ request()->is('kasir/expenses*') ? 'bg-amber-700' : '' }}">
                     Catat Pengeluaran
                 </a>
-                <a href="/kasir/products" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-amber-700 transition {{ request()->is('kasir/products*') ? 'bg-amber-700' : '' }}">
-                    Status Menu
-                </a>
             @endif
 
             @if(Auth::user()->role === 'customer')
