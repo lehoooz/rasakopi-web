@@ -15,7 +15,7 @@
         <a href="/" class="flex items-center gap-2">
             <img src="{{ asset('images/logo.png') }}" alt="Rasakopi" class="h-9 w-auto"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-            <span style="display:none" class="text-xl font-bold text-amber-800">Rasakopi</span>
+            <span class="text-xl font-bold text-amber-800">Rasakopi</span>
         </a>
 
         <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
