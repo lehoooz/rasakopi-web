@@ -22,7 +22,7 @@
         </button>
         <a href="/admin/reports/export?start_date={{ $startDate }}&end_date={{ $endDate }}"
             class="bg-green-600 hover:bg-green-700 text-white font-semibold px-5 py-2 rounded-lg text-sm transition flex items-center gap-2">
-            ⬇ Export Excel
+            Export Excel
         </a>
     </form>
 </div>

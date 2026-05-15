@@ -39,7 +39,7 @@
 
             @if(Auth::user()->role === 'kasir')
                 <a href="/kasir/pos" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-amber-700 transition {{ request()->is('kasir/pos*') ? 'bg-amber-700' : '' }}">
-                    Buat Pesanan (POS)
+                    Kasir
                 </a>
                 <a href="/kasir" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-amber-700 transition {{ request()->is('kasir') ? 'bg-amber-700' : '' }}">
                     Riwayat Transaksi

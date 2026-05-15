@@ -37,7 +37,7 @@
     {{-- KANAN: Keranjang --}}
     <div class="w-80 flex-shrink-0">
         <div class="bg-white rounded-xl shadow-sm p-5 sticky top-6">
-            <h3 class="font-bold text-gray-700 text-base mb-4">🧾 Keranjang</h3>
+            <h3 class="font-bold text-gray-700 text-base mb-4">Keranjang</h3>
 
             {{-- Pilih Member --}}
             <div class="mb-4">
