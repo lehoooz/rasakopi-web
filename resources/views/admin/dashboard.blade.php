@@ -74,7 +74,7 @@
                     <tr class="hover:bg-gray-50">
                         <td class="py-3 text-gray-400">#{{ $order->id }}</td>
                         <td class="py-3 font-medium text-gray-700">{{ $order->kasir->name ?? '-' }}</td>
-                        <td class="py-3 text-gray-600">{{ $order->customer->name ?? '<span class="text-gray-400 italic">Umum</span>' }}</td>
+                        <td class="py-3 text-gray-600">{!! $order->customer ? e($order->customer->name) : '<span class="text-gray-400 italic">Umum</span>' !!}</td>
                         <td class="py-3">Rp {{ number_format($order->total_price, 0, ',', '.') }}</td>
                         <td class="py-3 text-red-500">
                             {{ $order->discount_amount > 0 ? '- Rp ' . number_format($order->discount_amount, 0, ',', '.') : '-' }}
