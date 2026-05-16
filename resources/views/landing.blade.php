@@ -83,11 +83,11 @@
     </div>
 
     <div class="relative max-w-6xl mx-auto px-6 pt-20">
-        @if(session('success'))
+        <!-- @if(session('success'))
             <div class="mb-6 bg-green-500/90 text-white px-5 py-3 rounded-lg text-sm font-medium">
                 {{ session('success') }}
             </div>
-        @endif
+        @endif -->
 
         <p class="text-amber-300 font-medium tracking-widest text-sm uppercase mb-4">Selamat Datang di</p>
         <h1 class="text-5xl md:text-7xl font-bold text-white leading-tight mb-6">
@@ -114,17 +114,17 @@
     <div class="max-w-6xl mx-auto px-6">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div class="p-6">
-                <div class="w-12 h-12 bg-amber-200 rounded-full mb-4 mx-auto"></div>
+                
                 <h3 class="font-bold text-gray-800 text-lg mb-2">Biji Kopi Pilihan</h3>
                 <p class="text-gray-500 text-sm leading-relaxed">Kami hanya menggunakan biji kopi berkualitas tinggi yang dipilih langsung dari petani lokal terbaik.</p>
             </div>
             <div class="p-6">
-                <div class="w-12 h-12 bg-amber-200 rounded-full mb-4 mx-auto"></div>
+                
                 <h3 class="font-bold text-gray-800 text-lg mb-2">Program Loyalitas</h3>
                 <p class="text-gray-500 text-sm leading-relaxed">Beli 10 cup, dapatkan 1 cup gratis! Daftar sebagai member dan mulai kumpulkan poinmu sekarang.</p>
             </div>
             <div class="p-6">
-                <div class="w-12 h-12 bg-amber-200 rounded-full mb-4 mx-auto"></div>
+                
                 <h3 class="font-bold text-gray-800 text-lg mb-2">Suasana Nyaman</h3>
                 <p class="text-gray-500 text-sm leading-relaxed">Tempat yang hangat dan nyaman untuk bekerja, bersantai, atau sekadar menikmati waktu bersama.</p>
             </div>
