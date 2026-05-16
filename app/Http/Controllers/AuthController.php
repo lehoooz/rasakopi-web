@@ -63,6 +63,10 @@ class AuthController extends Controller
         Auth::login($user);
         $request->session()->regenerate();
 
+        if ($request->redirect === 'qr-checkout') {
+            return redirect('/qr-menu/checkout')->with('success', 'Selamat datang, ' . $user->name . '! Silakan lanjutkan pesanan.');
+        }
+
         return redirect('/')->with('success', 'Selamat datang di Rasakopi, ' . $user->name . '!');
     }
 
@@ -82,6 +86,9 @@ class AuthController extends Controller
             $request->session()->regenerate();
 
             if (Auth::user()->role === 'customer') {
+                if ($request->redirect === 'qr-checkout') {
+                    return redirect('/qr-menu/checkout');
+                }
                 return redirect('/');
             }
 

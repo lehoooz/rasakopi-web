@@ -83,11 +83,17 @@
     </div>
 
     <div class="relative max-w-6xl mx-auto px-6 pt-20">
-        <!-- @if(session('success'))
-            <div class="mb-6 bg-green-500/90 text-white px-5 py-3 rounded-lg text-sm font-medium">
-                {{ session('success') }}
+        @if(session('success'))
+            <div class="mb-6 bg-green-500/90 backdrop-blur-md text-white px-5 py-3 rounded-xl text-sm font-bold flex items-center gap-3 shadow-lg">
+                <span>✅</span> {{ session('success') }}
             </div>
-        @endif -->
+        @endif
+
+        @if(session('error'))
+            <div class="mb-6 bg-red-500/90 backdrop-blur-md text-white px-5 py-3 rounded-xl text-sm font-bold flex items-center gap-3 shadow-lg">
+                <span>⚠️</span> {{ session('error') }}
+            </div>
+        @endif
 
         <p class="text-amber-300 font-medium tracking-widest text-sm uppercase mb-4">Selamat Datang di</p>
         <h1 class="text-5xl md:text-7xl font-bold text-white leading-tight mb-6">

@@ -32,6 +32,9 @@
                 <a href="/admin/users" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-amber-700 transition {{ request()->is('admin/users*') ? 'bg-amber-700' : '' }}">
                     Kelola Akun
                 </a>
+                <a href="/admin/tables" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-amber-700 transition {{ request()->is('admin/tables*') ? 'bg-amber-700' : '' }}">
+                    Kelola Meja (QR)
+                </a>
                 <a href="/admin/reports" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-amber-700 transition {{ request()->is('admin/reports*') ? 'bg-amber-700' : '' }}">
                     Laporan Keuangan
                 </a>

@@ -10,9 +10,18 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\QrOrderController;
 
 // ── Publik ────────────────────────────────────────────────
 Route::get('/', [LandingController::class, 'index']);
+
+// ── QR Dine In (Guest & Customer) ─────────────────────────
+Route::get('/qr-menu', [QrOrderController::class, 'index']);
+Route::post('/qr-menu/cart/add', [QrOrderController::class, 'addToCart']);
+Route::post('/qr-menu/cart/remove', [QrOrderController::class, 'removeFromCart']);
+Route::get('/qr-menu/checkout', [QrOrderController::class, 'checkout']);
+Route::post('/qr-menu/checkout', [QrOrderController::class, 'processCheckout']);
+Route::get('/qr-menu/success', [QrOrderController::class, 'success']);
 
 // Auth Customer
 Route::middleware('guest')->group(function () {
@@ -30,6 +39,8 @@ Route::middleware('guest')->group(function () {
 });
 Route::post('/staff/logout', [AuthController::class, 'staffLogout'])->name('staff.logout');
 
+use App\Http\Controllers\AdminTableController;
+
 // ── Admin ─────────────────────────────────────────────────
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'dashboard']);
@@ -41,6 +52,12 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/products/{product}/edit', [ProductController::class, 'edit']);
     Route::put('/products/{product}', [ProductController::class, 'update']);
     Route::delete('/products/{product}', [ProductController::class, 'destroy']);
+    
+    // Kelola Meja (QR)
+    Route::get('/tables', [AdminTableController::class, 'index']);
+    Route::post('/tables', [AdminTableController::class, 'store']);
+    Route::delete('/tables/{table}', [AdminTableController::class, 'destroy']);
+    Route::get('/tables/print', [AdminTableController::class, 'print']);
     
     // Kelola Akun (Users)
     Route::get('/users', [UserController::class, 'index']);
@@ -60,6 +77,7 @@ Route::middleware(['auth', 'role:kasir'])->prefix('kasir')->group(function () {
     Route::get('/', [OrderController::class, 'history']);
     Route::get('/pos', [OrderController::class, 'pos']);
     Route::post('/pos', [OrderController::class, 'store']);
+    Route::post('/orders/{order}/complete', [OrderController::class, 'completeQrOrder']);
     Route::get('/expenses', [ExpenseController::class, 'index']);
     Route::post('/expenses', [ExpenseController::class, 'store']);
     Route::delete('/expenses/{expense}', [ExpenseController::class, 'destroy']);
