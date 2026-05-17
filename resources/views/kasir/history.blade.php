@@ -120,7 +120,7 @@
                     <tr class="hover:bg-gray-50 align-top">
                         <td class="px-5 py-4 text-gray-400">#{{ $order->id }}</td>
                         <td class="px-5 py-4">
-                            @if($order->order_type === 'qr')
+                            @if($order->payment_method === 'qr')
                                 <span class="font-semibold text-gray-700">{{ $order->customer_name ?? 'Tamu' }}</span>
                                 <span class="block text-xs text-gray-400">Meja {{ $order->table_number }}</span>
                             @else
@@ -128,7 +128,7 @@
                             @endif
                         </td>
                         <td class="px-5 py-4">
-                            @if($order->order_type === 'qr')
+                            @if($order->payment_method === 'qr')
                                 <span style="background:#FEF3C7;color:#92400E;font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;">QR</span>
                             @else
                                 <span style="background:#E0F2FE;color:#0369A1;font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;">Kasir</span>

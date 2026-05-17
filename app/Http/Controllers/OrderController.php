@@ -58,6 +58,7 @@ class OrderController extends Controller
             $order = Order::create([
                 'user_id'         => Auth::id(),
                 'customer_id'     => $customer?->id,
+                'payment_method'  => 'cash',
                 'total_price'     => $totalPrice,
                 'discount_amount' => $discount,
                 'grand_total'     => $grandTotal,
@@ -89,7 +90,7 @@ class OrderController extends Controller
     {
         // Pesanan QR yang masih pending (antrean meja)
         $qrOrders = Order::with(['orderDetails.product'])
-            ->where('order_type', 'qr')
+            ->where('payment_method', 'qr')
             ->where('status', 'pending')
             ->whereDate('created_at', today())
             ->latest()
