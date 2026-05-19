@@ -58,7 +58,6 @@ class OrderController extends Controller
             $order = Order::create([
                 'user_id'         => Auth::id(),
                 'customer_id'     => $customer?->id,
-                'payment_method'  => 'cash',
                 'total_price'     => $totalPrice,
                 'discount_amount' => $discount,
                 'grand_total'     => $grandTotal,
