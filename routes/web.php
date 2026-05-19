@@ -13,6 +13,7 @@ use App\Http\Controllers\UserController;
 
 // ── Publik ────────────────────────────────────────────────
 Route::get('/', [LandingController::class, 'index']);
+Route::get('/api/ai-recommendation', [LandingController::class, 'aiRecommendation']);
 
 // Auth
 Route::middleware('guest')->group(function () {
