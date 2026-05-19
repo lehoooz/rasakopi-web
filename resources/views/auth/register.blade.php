@@ -31,7 +31,7 @@
             </div>
         @endif
 
-        <form method="POST" action="/register{{ request('redirect') ? '?redirect='.request('redirect') : '' }}">
+        <form method="POST" action="/register">
             @csrf
             <div class="mb-4">
                 <label class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
@@ -60,16 +60,12 @@
 
         <p class="text-center text-sm text-gray-500 mt-4">
             Sudah punya akun?
-            <a href="/login{{ request('redirect') ? '?redirect='.request('redirect') : '' }}" class="text-amber-700 font-semibold hover:underline">Masuk</a>
+            <a href="/login" class="text-amber-700 font-semibold hover:underline">Masuk</a>
         </p>
     </div>
 
     <p class="text-center mt-4">
-        @if(request('redirect') === 'qr-checkout')
-            <a href="/qr-menu/checkout" class="text-gray-400 text-sm hover:text-gray-600 transition">← Kembali ke Checkout</a>
-        @else
-            <a href="/" class="text-gray-400 text-sm hover:text-gray-600 transition">← Kembali ke Beranda</a>
-        @endif
+        <a href="/" class="text-gray-400 text-sm hover:text-gray-600 transition">← Kembali ke Beranda</a>
     </p>
 </div>
 

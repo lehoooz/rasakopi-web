@@ -88,30 +88,12 @@ class OrderController extends Controller
 
     public function history()
     {
-        // Pesanan QR yang masih pending (antrean meja)
-        $qrOrders = Order::with(['orderDetails.product'])
-            ->where('payment_method', 'qr')
-            ->where('status', 'pending')
-            ->whereDate('created_at', today())
-            ->latest()
-            ->get();
-
         // Semua transaksi hari ini (riwayat)
         $orders = Order::with(['customer', 'kasir', 'orderDetails.product'])
             ->whereDate('created_at', today())
             ->latest()
             ->paginate(15);
 
-        return view('kasir.history', compact('orders', 'qrOrders'));
-    }
-
-    public function completeQrOrder(Order $order)
-    {
-        $order->update([
-            'status'  => 'completed',
-            'user_id' => auth()->id(), // Catat kasir yang menyelesaikan
-        ]);
-
-        return redirect()->back()->with('success', 'Pesanan meja ' . $order->table_number . ' selesai!');
+        return view('kasir.history', compact('orders'));
     }
 }
