@@ -227,7 +227,7 @@
         </div>
         <p class="text-sm">© {{ date('Y') }} Rasakopi. All rights reserved.</p>
         <p class="text-xs text-gray-600">
-            <a href="/staff/login" class="hover:text-gray-400 transition">Staff</a>
+            <a href="/login" class="hover:text-gray-400 transition">Login</a>
         </p>
     </div>
 </footer>

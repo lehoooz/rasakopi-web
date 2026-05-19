@@ -14,7 +14,7 @@ use App\Http\Controllers\UserController;
 // ── Publik ────────────────────────────────────────────────
 Route::get('/', [LandingController::class, 'index']);
 
-// Auth Customer
+// Auth
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login']);
@@ -22,13 +22,6 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
 });
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-// Auth Staff
-Route::middleware('guest')->group(function () {
-    Route::get('/staff/login', [AuthController::class, 'showStaffLogin'])->name('staff.login');
-    Route::post('/staff/login', [AuthController::class, 'staffLogin']);
-});
-Route::post('/staff/logout', [AuthController::class, 'staffLogout'])->name('staff.logout');
 
 // ── Admin ─────────────────────────────────────────────────
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {

@@ -74,7 +74,7 @@
                     <p class="text-amber-300 text-xs truncate">{{ Auth::user()->email }}</p>
                 </div>
             </div>
-            <form method="POST" action="{{ route('staff.logout') }}">
+            <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit" class="w-full text-left flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-amber-700 transition text-sm">
                     Keluar
