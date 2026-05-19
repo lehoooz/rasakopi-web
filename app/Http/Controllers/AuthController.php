@@ -56,7 +56,7 @@ class AuthController extends Controller
             if ($role === 'admin') {
                 return redirect('/admin');
             } elseif ($role === 'kasir') {
-                return redirect('/kasir');
+                return redirect('/kasir/pos');
             } else {
                 return redirect('/');
             }
