@@ -6,6 +6,8 @@ use App\Models\Order;
 use App\Models\Expense;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Exports\ReportExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ReportController extends Controller
 {
@@ -32,5 +34,16 @@ class ReportController extends Controller
             'totalPendapatan', 'totalPengeluaran', 'labaRugi',
             'startDate', 'endDate'
         ));
+    }
+
+    public function export(Request $request)
+    {
+        $startDate = $request->get('start_date', today()->toDateString());
+        $endDate   = $request->get('end_date', today()->toDateString());
+
+        return Excel::download(
+            new ReportExport($startDate, $endDate),
+            'laporan_keuangan_' . $startDate . '_to_' . $endDate . '.xlsx'
+        );
     }
 }

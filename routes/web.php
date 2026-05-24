@@ -46,6 +46,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     
     // Laporan
     Route::get('/reports', [ReportController::class, 'index']);
+    Route::get('/reports/export', [ReportController::class, 'export']);
 });
 
 // ── Kasir ─────────────────────────────────────────────────
