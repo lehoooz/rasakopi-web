@@ -26,7 +26,6 @@
 
     @if($user->cup_count >= 10)
         <div class="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
-            <p class="text-2xl mb-1">🎉</p>
             <p class="text-green-700 font-semibold">Selamat! Kamu berhak dapat 1 cup kopi gratis!</p>
             <p class="text-green-600 text-sm mt-1">Tunjukkan halaman ini ke kasir saat memesan.</p>
         </div>

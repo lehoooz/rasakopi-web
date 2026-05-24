@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Expense;
-use App\Exports\ReportExport;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
 use Carbon\Carbon;
+use App\Exports\ReportExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ReportController extends Controller
 {
@@ -41,8 +41,9 @@ class ReportController extends Controller
         $startDate = $request->get('start_date', today()->toDateString());
         $endDate   = $request->get('end_date', today()->toDateString());
 
-        $filename = 'laporan-rasakopi-' . $startDate . '-sd-' . $endDate . '.xlsx';
-
-        return Excel::download(new ReportExport($startDate, $endDate), $filename);
+        return Excel::download(
+            new ReportExport($startDate, $endDate),
+            'laporan_keuangan_' . $startDate . '_to_' . $endDate . '.xlsx'
+        );
     }
 }

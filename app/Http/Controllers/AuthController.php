@@ -9,36 +9,6 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    // ── Staff (Admin & Kasir) ──────────────────────────────
-
-    public function showStaffLogin()
-    {
-        return view('auth.staff-login');
-    }
-
-    public function staffLogin(Request $request)
-    {
-        $credentials = $request->validate([
-            'email'    => ['required', 'email'],
-            'password' => ['required'],
-        ]);
-
-        if (Auth::attempt($credentials)) {
-            $role = Auth::user()->role;
-
-            if ($role === 'admin' || $role === 'kasir') {
-                $request->session()->regenerate();
-                return redirect($role === 'admin' ? '/admin' : '/kasir');
-            }
-
-            Auth::logout();
-        }
-
-        return back()->withErrors(['email' => 'Email atau password salah.'])->onlyInput('email');
-    }
-
-    // ── Customer ───────────────────────────────────────────
-
     public function showRegister()
     {
         return view('auth.register');
@@ -63,10 +33,6 @@ class AuthController extends Controller
         Auth::login($user);
         $request->session()->regenerate();
 
-        if ($request->redirect === 'qr-checkout') {
-            return redirect('/qr-menu/checkout')->with('success', 'Selamat datang, ' . $user->name . '! Silakan lanjutkan pesanan.');
-        }
-
         return redirect('/')->with('success', 'Selamat datang di Rasakopi, ' . $user->name . '!');
     }
 
@@ -84,15 +50,16 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+            $role = Auth::user()->role;
 
-            if (Auth::user()->role === 'customer') {
-                if ($request->redirect === 'qr-checkout') {
-                    return redirect('/qr-menu/checkout');
-                }
+            // Pengalihan dinamis otomatis berdasarkan peran pengguna
+            if ($role === 'admin') {
+                return redirect('/admin');
+            } elseif ($role === 'kasir') {
+                return redirect('/kasir/pos');
+            } else {
                 return redirect('/');
             }
-
-            Auth::logout();
         }
 
         return back()->withErrors(['email' => 'Email atau password salah.'])->onlyInput('email');
@@ -104,13 +71,5 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/');
-    }
-
-    public function staffLogout(Request $request)
-    {
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        return redirect('/staff/login');
     }
 }

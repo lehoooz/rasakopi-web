@@ -7,7 +7,7 @@
 {{-- Sapaan --}}
 <div class="bg-amber-800 text-white rounded-xl p-6 mb-6">
     <p class="text-amber-200 text-sm">Selamat datang kembali,</p>
-    <h2 class="text-2xl font-bold mt-1">{{ $user->name }} ☕</h2>
+    <h2 class="text-2xl font-bold mt-1">{{ $user->name }}</h2>
     <p class="text-amber-200 text-sm mt-1">Terima kasih sudah setia bersama Rasakopi!</p>
 </div>
 
@@ -24,7 +24,7 @@
     </div>
 
     @if($user->cup_count >= 10)
-        <p class="text-green-600 font-semibold text-sm">🎉 Selamat! Kamu berhak mendapatkan 1 cup kopi gratis pada transaksi berikutnya!</p>
+        <p class="text-green-600 font-semibold text-sm">Selamat! Kamu berhak mendapatkan 1 cup kopi gratis pada transaksi berikutnya!</p>
     @else
         <p class="text-gray-500 text-sm">Butuh <span class="font-bold text-amber-700">{{ $cupsNeeded }} cup lagi</span> untuk mendapatkan 1 cup gratis!</p>
     @endif

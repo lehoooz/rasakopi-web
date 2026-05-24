@@ -148,14 +148,21 @@
 
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             @forelse($products as $product)
-            <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition duration-300 hover:-translate-y-1">
+            <div onclick="loadAiSommelier('{{ $product->name }}', '{{ $product->image ? asset('storage/' . $product->image) : '' }}', '{{ $product->price }}')" 
+                 class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition duration-300 hover:-translate-y-1 cursor-pointer group relative">
                 @if($product->image)
-                    <img src="{{ asset('storage/' . $product->image) }}" class="w-full h-40 object-cover">
+                    <img src="{{ asset('storage/' . $product->image) }}" class="w-full h-40 object-cover group-hover:scale-105 transition duration-500">
                 @else
                     <div class="w-full h-40 bg-amber-50 flex items-center justify-center text-gray-300 text-sm">Foto tidak tersedia</div>
                 @endif
+                <div class="absolute top-3 right-3 opacity-0 group-hover:opacity-85 transition duration-300">
+                    <svg class="w-6 h-6 text-amber-200 drop-shadow-md" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 3c0 4.97-4.03 9-9 9 4.97 0 9 4.03 9 9 0-4.97 4.03-9 9-9-4.97 0-9-4.03-9-9z"/>
+                        <path d="M19 3c0 2.21-1.79 4-4 4 2.21 0 4 1.79 4 4 0-2.21 1.79-4 4-4-2.21 0-4-1.79-4-4z"/>
+                    </svg>
+                </div>
                 <div class="p-4">
-                    <p class="font-semibold text-gray-800">{{ $product->name }}</p>
+                    <p class="font-semibold text-gray-800 group-hover:text-amber-800 transition">{{ $product->name }}</p>
                     <p class="text-amber-700 font-bold mt-1">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
                 </div>
             </div>
@@ -227,10 +234,72 @@
         </div>
         <p class="text-sm">© {{ date('Y') }} Rasakopi. All rights reserved.</p>
         <p class="text-xs text-gray-600">
-            <a href="/staff/login" class="hover:text-gray-400 transition">Staff</a>
+            <a href="/login" class="hover:text-gray-400 transition">Login</a>
         </p>
     </div>
 </footer>
+
+{{-- MODAL AI RECOMMENDATION (BEBAS EMOJI & SANGAT MINIMALIS) --}}
+<div id="ai-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
+    <div class="bg-white rounded-2xl shadow-2xl overflow-hidden max-w-2xl w-full max-h-[90vh] flex flex-col md:flex-row transform scale-95 transition-transform duration-300">
+        
+        {{-- Kiri: Foto Produk Asli & Jernih (Tanpa Gradasi/Blur) --}}
+        <div class="md:w-1/2 bg-amber-50 flex items-center justify-center relative min-h-[250px] md:min-h-auto overflow-hidden">
+            <img id="modal-product-image" src="" alt="Foto Produk" class="w-full h-full object-cover absolute inset-0">
+        </div>
+
+        {{-- Kanan: Panel Deskripsi AI --}}
+        <div class="md:w-1/2 p-6 flex flex-col justify-between max-h-[60vh] md:max-h-none overflow-y-auto bg-amber-50/10">
+            
+            <div>
+                {{-- Header AI --}}
+                <div class="flex items-center justify-between border-b pb-4 mb-4">
+                    <div>
+                        <h4 id="modal-product-name" class="text-xl font-bold text-gray-800 tracking-wide"></h4>
+                        <p id="modal-product-price" class="text-amber-700 font-bold mt-0.5 text-sm"></p>
+                    </div>
+                    <button onclick="closeAiSommelier()" class="text-gray-400 hover:text-gray-600 transition p-1.5 rounded-lg hover:bg-gray-100">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+
+                {{-- Konten Loading AI --}}
+                <div id="ai-loading" class="py-12 flex flex-col items-center justify-center gap-4">
+                    <div class="w-10 h-10 border-4 border-amber-800 border-t-transparent rounded-full animate-spin"></div>
+                    <p class="text-sm text-amber-800 font-semibold tracking-wider animate-pulse">Menghubungi AI Sommelier...</p>
+                </div>
+
+                {{-- Konten Error --}}
+                <div id="ai-error" class="hidden py-8 text-center">
+                    <div class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                        </svg>
+                    </div>
+                    <p id="error-message" class="text-sm text-red-600 font-semibold px-4"></p>
+                </div>
+
+                {{-- Hasil Konten AI --}}
+                <div id="ai-content" class="hidden space-y-4">
+                    <div>
+                        <h5 class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Analisis Kuliner AI</h5>
+                        <p id="ai-description" class="text-sm text-gray-700 leading-relaxed min-h-[100px]"></p>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="mt-6 border-t pt-4 text-center">
+                <button onclick="closeAiSommelier()" class="bg-amber-800 hover:bg-amber-900 text-white font-semibold py-2 px-6 rounded-xl transition text-sm">
+                    Tutup Analisis
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 <script>
     function toggleDropdown() {
@@ -244,6 +313,81 @@
             dropdown.classList.add('hidden');
         }
     });
+
+    let typewriterInterval = null;
+
+    function loadAiSommelier(name, imageUrl, price) {
+        // Reset state
+        clearInterval(typewriterInterval);
+        document.getElementById('ai-description').innerText = '';
+        
+        // Update product info
+        document.getElementById('modal-product-name').innerText = name;
+        document.getElementById('modal-product-price').innerText = 'Rp ' + parseInt(price).toLocaleString('id-ID');
+        
+        const imgEl = document.getElementById('modal-product-image');
+        if (imageUrl) {
+            imgEl.src = imageUrl;
+            imgEl.classList.remove('hidden');
+        } else {
+            imgEl.src = '';
+            imgEl.classList.add('hidden');
+        }
+
+        // Show modal and loading state
+        const modal = document.getElementById('ai-modal');
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+            modal.classList.remove('opacity-0');
+            modal.querySelector('.transform').classList.remove('scale-95');
+        }, 50);
+
+        document.getElementById('ai-loading').classList.remove('hidden');
+        document.getElementById('ai-error').classList.add('hidden');
+        document.getElementById('ai-content').classList.add('hidden');
+
+        // Fetch AI recommendations from Gemini API endpoint
+        fetch('/api/ai-recommendation?name=' + encodeURIComponent(name))
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(err => { throw new Error(err.error || 'Terjadi kesalahan sistem.'); });
+                }
+                return response.json();
+            })
+            .then(data => {
+                document.getElementById('ai-loading').classList.add('hidden');
+                document.getElementById('ai-content').classList.remove('hidden');
+
+                // Start typewriter animation for AI description
+                const descText = data.description || '';
+                let index = 0;
+                const descEl = document.getElementById('ai-description');
+                typewriterInterval = setInterval(() => {
+                    if (index < descText.length) {
+                        descEl.innerHTML += descText.charAt(index);
+                        index++;
+                    } else {
+                        clearInterval(typewriterInterval);
+                    }
+                }, 15);
+            })
+            .catch(error => {
+                document.getElementById('ai-loading').classList.add('hidden');
+                const errDiv = document.getElementById('ai-error');
+                errDiv.classList.remove('hidden');
+                document.getElementById('error-message').innerText = error.message;
+            });
+    }
+
+    function closeAiSommelier() {
+        clearInterval(typewriterInterval);
+        const modal = document.getElementById('ai-modal');
+        modal.classList.add('opacity-0');
+        modal.querySelector('.transform').classList.add('scale-95');
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 300);
+    }
 </script>
 
 </body>
